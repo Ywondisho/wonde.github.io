@@ -1,0 +1,246 @@
+html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wondetest - Synthetic House Dashboard</title>
+    <script src="https://jsdelivr.net"></script>
+    <script src="https://tailwindcss.com"></script>
+    <style>
+        @import url('https://googleapis.com');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-[#0b0f19] text-slate-100 min-h-screen flex flex-col selection:bg-cyan-500/30">
+
+    <!-- Header Navigation -->
+    <header class="border-b border-slate-800 bg-[#0f172a]/80 backdrop-blur-md sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-400 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+                <svg class="w-5 h-5 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            </div>
+            <div>
+                <h1 class="font-bold text-lg tracking-tight bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">wondetest</h1>
+                <p class="text-xs text-slate-500 font-medium">Synthetic Architectural Core</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-3 text-xs font-semibold bg-slate-900 px-4 py-2 rounded-full border border-slate-800 shadow-inner">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="text-slate-400 uppercase tracking-wider">System Live</span>
+        </div>
+    </header>
+
+    <!-- Main Dashboard Body -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Left Sidebar: Controls & Layout Customizer -->
+        <div class="space-y-6 lg:col-span-1">
+            
+            <!-- Floor Plan & Theme Selector -->
+            <div class="bg-[#111827] border border-slate-800 rounded-2xl p-5 shadow-xl">
+                <h2 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg>
+                    Structural Matrix
+                </h2>
+                
+                <label class="block text-xs font-semibold text-slate-400 mb-2">Active Architecture Layout</label>
+                <select id="layoutSelect" class="w-full bg-[#1f2937] border border-slate-700 text-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-cyan-500 font-medium transition mb-4">
+                    <option value="minimalist">Cyber-Minimalist Loft (2 Story)</option>
+                    <option value="brutalist">Synthetic Brutalist Pavilion</option>
+                    <option value="biophilic">Biophilic Solar Greenhouse</option>
+                </select>
+
+                <div class="p-3 bg-cyan-950/30 border border-cyan-800/30 rounded-xl flex gap-3 items-start">
+                    <svg class="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <p class="text-xs text-slate-400 leading-relaxed" id="layoutDesc">Ultra-efficient workflow footprint featuring an integrated server rack thermal array.</p>
+                </div>
+            </div>
+
+            <!-- Synthetic Services Toggles -->
+            <div class="bg-[#111827] border border-slate-800 rounded-2xl p-5 shadow-xl">
+                <h2 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+                    Environmental Nodes
+                </h2>
+                <div class="space-y-3">
+                    <!-- Service 1 -->
+                    <div class="flex items-center justify-between p-3.5 bg-[#1f2937]/50 border border-slate-800 rounded-xl hover:border-slate-700 transition">
+                        <div class="flex items-center gap-3">
+                            <div id="icon-hvac" class="w-9 h-9 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-400">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xs font-semibold text-slate-200">HVAC Climate Array</h3>
+                                <p class="text-[10px] text-slate-500" id="status-hvac">Target: 21.5°C</p>
+                            </div>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="toggle-hvac" checked class="sr-only peer">
+                            <div class="w-9 h-5 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-slate-400 after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-cyan-500 peer-checked:after:bg-slate-900"></div>
+                        </label>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="flex items-center justify-between p-3.5 bg-[#1f2937]/50 border border-slate-800 rounded-xl hover:border-slate-700 transition">
+                        <div class="flex items-center gap-3">
+                            <div id="icon-lux" class="w-9 h-9 rounded-lg bg-amber-500/10 flex items-center justify-center text-amber-400">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xs font-semibold text-slate-200">Lux Mesh Lighting</h3>
+                                <p class="text-[10px] text-slate-500" id="status-lux">Luminous Flux: 450lm</p>
+                            </div>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="toggle-lux" checked class="sr-only peer">
+                            <div class="w-9 h-5 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-slate-400 after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-500 peer-checked:after:bg-slate-900"></div>
+                        </label>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="flex items-center justify-between p-3.5 bg-[#1f2937]/50 border border-slate-800 rounded-xl hover:border-slate-700 transition">
+                        <div class="flex items-center gap-3">
+                            <div id="icon-sec" class="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xs font-semibold text-slate-200">Perimeter Firewall Shield</h3>
+                                <p class="text-[10px] text-slate-500" id="status-sec">Encrypted Loop Active</p>
+                            </div>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="toggle-sec" checked class="sr-only peer">
+Use code with caution.
+Synthetic Layout Field
+Cyber-Minimalist Loft (2 Story)
+
+
+SCALE 1:50
+
+RAD: 0.02 μSv/h
+CO2: 380 ppm
+TEMP: 21.5 °C
+
+Resource Telemetry Array
+
+Interval: 1000ms
+
+
+
+
+wondetest Sandbox Platform • Powered by Synthetic Core Engineering • 2026
+// Layout Profiles Meta Array
+const layouts = {
+minimalist: {
+title: "Cyber-Minimalist Loft (2 Story)",
+desc: "Ultra-efficient workflow footprint featuring an integrated server rack thermal array.",
+vector: <rect x="20" y="50" width="160" height="80" rx="4" class="opacity-40" stroke-dasharray="4 4" /><line x1="20" y1="90" x2="180" y2="90" /><rect id="v-lux" x="40" y="65" width="30" height="15" rx="2" class="text-amber-500/20 stroke-amber-500" fill="currentColor"/><rect id="v-hvac" x="130" y="100" width="30" height="20" rx="2" class="text-cyan-500/20 stroke-cyan-500" fill="currentColor"/><circle id="v-sec" cx="100" cy="90" r="10" class="text-emerald-500/20 stroke-emerald-400" fill="currentColor"/>
+},
+brutalist: {
+title: "Synthetic Brutalist Pavilion",
+desc: "Monolithic raw carbon slab structural panels with heavy passive eco-isolation chambers.",
+vector: <rect x="30" y="40" width="140" height="90" class="opacity-40" stroke-width="2" /><path d="M30 40 L100 15 L170 40 Z" /><rect id="v-lux" x="50" y="70" width="20" height="40" class="text-amber-500/20 stroke-amber-500" fill="currentColor"/><rect id="v-hvac" x="110" y="70" width="40" height="40" class="text-cyan-500/20 stroke-cyan-500" fill="currentColor"/><circle id="v-sec" cx="100" cy="28" r="8" class="text-emerald-500/20 stroke-emerald-400" fill="currentColor"/>
+},
+biophilic: {
+title: "Biophilic Solar Greenhouse",
+desc: "Hydroponic modular framework with polymer canopy membranes for light extraction.",
+vector: <path d="M20 120 C 20 40, 180 40, 180 120 Z" class="opacity-40" stroke-dasharray="2 2" /><line x1="20" y1="120" x2="180" y2="120" /><rect id="v-lux" x="85" y="50" width="30" height="15" rx="7" class="text-amber-500/20 stroke-amber-500" fill="currentColor"/><path id="v-hvac" d="M40 100 Q 60 80 80 100" class="text-cyan-500/20 stroke-cyan-500" fill="none"/><circle id="v-sec" cx="150" cy="95" r="12" class="text-emerald-500/20 stroke-emerald-400" fill="currentColor"/>
+}
+};
+// DOM Handles
+const layoutSelect = document.getElementById('layoutSelect');
+const blueprintTitle = document.getElementById('blueprintTitle');
+const layoutDesc = document.getElementById('layoutDesc');
+const houseVector = document.getElementById('houseVector');
+// Toggle Event Elements
+const services = {
+hvac: { toggle: document.getElementById('toggle-hvac'), status: document.getElementById('status-hvac'), node: 'v-hvac', activeText: 'Target: 21.5°C', inactiveText: 'Node Hibernating' },
+lux: { toggle: document.getElementById('toggle-lux'), status: document.getElementById('status-lux'), node: 'v-lux', activeText: 'Luminous Flux: 450lm', inactiveText: 'Dark Matrix Loop' },
+sec: { toggle: document.getElementById('toggle-sec'), status: document.getElementById('status-sec'), node: 'v-sec', activeText: 'Encrypted Loop Active', inactiveText: 'Firewall Suspended' }
+};
+// Layout Dropdown Logic
+layoutSelect.addEventListener('change', (e) => {
+const plan = layouts[e.target.value];
+blueprintTitle.innerText = plan.title;
+layoutDesc.innerText = plan.desc;
+houseVector.innerHTML = plan.vector;
+updateNodeOpacities();
+});
+// Toggle Render Interactivity
+function updateNodeOpacities() {
+Object.keys(services).forEach(key => {
+const s = services[key];
+const vectorNode = document.getElementById(s.node);
+if(s.toggle.checked) {
+s.status.innerText = s.activeText;
+s.status.classList.remove('text-slate-600');
+s.status.classList.add('text-slate-500');
+if(vectorNode) vectorNode.style.opacity = "1";
+} else {
+s.status.innerText = s.inactiveText;
+s.status.classList.remove('text-slate-500');
+s.status.classList.add('text-slate-600');
+if(vectorNode) vectorNode.style.opacity = "0.08";
+}
+});
+}
+Object.keys(services).forEach(key => {
+services[key].toggle.addEventListener('change', updateNodeOpacities);
+});
+// Telemetry Data Engine
+const ctx = document.getElementById('telemetryChart').getContext('2d');
+const telemetryChart = new Chart(ctx, {
+type: 'line',
+data: {
+labels: Array(10).fill(''),
+datasets: [
+{ label: 'Grid Load (kW)', data: Array(10).fill(1.8), borderColor: '#06b6d4', borderWidth: 2, tension: 0.4, pointRadius: 0 },
+{ label: 'Water Loop (L/m)', data: Array(10).fill(4.2), borderColor: '#10b981', borderWidth: 2, tension: 0.4, pointRadius: 0 }
+]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false,
+plugins: { legend: { labels: { color: '#94a3b8', font: { size: 10, weight: 600 } } } },
+scales: {
+x: { grid: { display: false } },
+y: { grid: { color: '#1f2937' }, ticks: { color: '#64748b', font: { size: 9 } } }
+}
+}
+});
+// Dynamic Environmental Simulator Loop
+setInterval(() => {
+// Read target impacts based on active states
+let powerFactor = (services.hvac.toggle.checked ? 1.5 : 0.2) + (services.lux.toggle.checked ? 0.4 : 0.05) + 0.3;
+let currentPower = powerFactor + (Math.random() * 0.3 - 0.15);
+let currentWater = (services.hvac.toggle.checked ? 4.0 : 1.2) + (Math.random() * 0.6 - 0.3);
+// Shift Array Telemetry
+telemetryChart.data.datasets[0].data.shift();
+telemetryChart.data.datasets[0].data.push(currentPower);
+telemetryChart.data.datasets[1].data.shift();
+telemetryChart.data.datasets[1].data.push(currentWater);
+telemetryChart.update();
+// Randomize Bottom Ambience Metric Reads
+document.getElementById('v-rad').innerText = (0.01 + Math.random() * 0.02).toFixed(3) + ' μSv/h';
+document.getElementById('v-co2').innerText = Math.floor(375 + Math.random() * 15) + ' ppm';
+document.getElementById('v-temp').innerText = (services.hvac.toggle.checked ? (21.2 + Math.random() * 0.6) : (24.0 + Math.random() * 0.8)).toFixed(1) + ' °C';
+}, 1000);
+// Run Initial Setup State
+updateNodeOpacities();
+
+
+
+The app mockup above features a **Cyber-Minimalist / Synth-Wave Dark UI**. It includes full interactive elements: toggling state controls alters the opacity of specific engineering schematic nodes, changes status descriptors, and affects the real-time resource loop chart calculations. 
+
+To use it, paste the code into your `index.html` file on GitHub.
+
+An interactive preview framework can be seen here to test user options in your browser:
+<Generate is_editing_existing_widget="false">
+  Original User Request: different visual theme and copiable code
+  Widget Instructions: Generate an interactive architecture system view using a neon cyber-minimalist premium dark theme with simulation logs.
+</Generate>
+
+<FollowUp>
+Would you like to add any **custom landing elements** (such as a structural grid diagram or a developer contact card) before publishing this live onto your **wondetest** branch?
+</FollowUp>
